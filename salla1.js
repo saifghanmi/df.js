@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Salla dash v0.0
+// @name         Salla dash v0.1
 // @namespace    http://tampermonkey.net/
 // @version      2024-01-16
 // @description  try to take over the world!
@@ -39,5 +39,30 @@ const intervalId = setInterval(checkForTarget, 23);
     targetElement.parentNode.insertBefore(elementToMove, targetElement);
   }
 }
+
+
+
+
+
+      if (window.location.href.startsWith("https://s.salla.sa/orders/print/")) {
+
+
+            var style = document.createElement('style');
+  style.textContent = '@media print { .hello { color: red !important; } }';
+  document.head.appendChild(style);
+
+  var spans = document.getElementsByTagName('span');
+  for (var i = 0; i < spans.length; i++) {
+    var span = spans[i];
+    var spanText = span.textContent.trim();
+    if (spanText.includes('سريع')) {
+      span.classList.add('hello');
+    }
+  }
+
+
+}
+
+
 
 })();
