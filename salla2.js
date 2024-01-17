@@ -14,6 +14,61 @@
 
     if (window.location.href.startsWith("https://s.salla.sa/orders/order/")) {
 
+
+var spans = document.querySelectorAll("span");
+
+for (var i = 0; i < spans.length; i++) {
+  var span = spans[i];
+  var spanText = span.textContent;
+
+  var matches = spanText.match(/من: "(.+)"\nالى: "(.+)"\nالرسالة: "((?:[^"\\]|\\.)+)"(?:\nالرابط: (.+))?/);
+
+  if (matches) {
+    var from = matches[1];
+    var to = matches[2];
+    var message = matches[3];
+    var link = matches[4] || '';
+
+    var formattedText = 'من: "' + from + '"\nالى: "' + to + '"\nالرسالة: "' + message + '"\nالرابط: ' + link;
+
+    var div = document.createElement("div");
+    var lines = formattedText.split('\n');
+
+    for (var j = 0; j < lines.length; j++) {
+      var line = document.createElement("div");
+
+      if (j === lines.length - 1 && link) {
+        var lineText = document.createTextNode(lines[j] + " ");
+        line.appendChild(lineText);
+
+        var lineBreak = document.createElement("br");
+        line.appendChild(lineBreak);
+
+        var anchor = document.createElement("a");
+        anchor.href = link;
+        anchor.target = "_blank"; // Open link in a new tab
+
+        var image = document.createElement("img");
+        image.src = link; // assuming the link itself is the URL of the image
+        image.style.width = "100%";
+        image.style.height = "100%";
+        image.style.paddingTop = "13px";
+
+        anchor.appendChild(image);
+
+        line.appendChild(anchor);
+      } else {
+        line.textContent = lines[j];
+      }
+
+      div.appendChild(line);
+    }
+
+    span.parentNode.replaceChild(div, span);
+  }
+}
+
+
 const targetSelector = "#content_box > div.content > div.row > div > div.order-panels.rec-responsive > div:nth-child(5) > div.panel-body > div > div > div > span:nth-child(3)";
 const searchText = "توصيل سريع";
 
