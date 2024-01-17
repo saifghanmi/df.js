@@ -106,12 +106,12 @@ const intervalId = setInterval(checkForTarget, 23);
   style.textContent = '@media print { .hello { color: red !important; } }';
   document.head.appendChild(style);
 
-  var spans = document.getElementsByTagName('span');
-  for (var i = 0; i < spans.length; i++) {
-    var span = spans[i];
-    var spanText = span.textContent.trim();
-    if (spanText.includes('سريع')) {
-      span.classList.add('hello');
+  var spans1 = document.getElementsByTagName('span');
+  for (var ij = 0; ij < spans1.length; ij++) {
+    var span2 = spans1[ij];
+    var spanText1 = span.textContent.trim();
+    if (spanText1.includes('سريع')) {
+      span2.classList.add('hello');
     }
   }
 
